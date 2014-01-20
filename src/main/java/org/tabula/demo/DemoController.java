@@ -128,7 +128,6 @@ public class DemoController implements Initializable {
             counter.setLayoutY(startY);
             fxMap.getChildren().add(counter);
         }
-        System.out.println(i);
     }
 
     private void prepareBindings() {
