@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="567.0" prefWidth="922.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.tabula.demo.DemoController">
+    <children>
+        <BorderPane prefHeight="567.0" prefWidth="922.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <bottom>
+                <Pane prefHeight="31.0" prefWidth="922.0">
+                    <children>
+                        <Label layoutX="14.0" layoutY="6.0" text="Zoom level:" />
+                        <Label fx:id="label" contentDisplay="TOP" layoutX="76.0" layoutY="6.0" text="100%" />
+                    </children>
+                </Pane>
+            </bottom>
+            <center>
+                <ScrollPane>
+                    <content>
+                        <Group>
+                            <children>
+                                <Pane fx:id="fxMapPane">
+                                    <children>
+                                        <Group fx:id="fxMap">
+                                            <children>
+                                                <ImageView>
+                                                    <image>
+                                                        <Image preserveRatio="true" smooth="true" url="@/images/TKMap.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </children>
+                                        </Group>
+                                    </children>
+                                </Pane>
+                            </children>
+                        </Group>
+                    </content>
+                </ScrollPane>
+            </center>
+            <top>
+                <ToolBar>
+                    <items>
+                        <Button fx:id="fxZoomIn" mnemonicParsing="false" onAction="#zoomIn" text="Zoom in" />
+                        <Button fx:id="fxZoomOut" mnemonicParsing="false" onAction="#zoomOut" text="Zoom out" />
+                        <TextField fx:id="fxZoomText" prefHeight="25.0" prefWidth="38.0" text="100" />
+                        <Slider fx:id="fxSlider" blockIncrement="0.01" max="2.0" min="0.01" value="1.0" />
+                    </items>
+                </ToolBar>
+            </top>
+        </BorderPane>
+    </children>
+</AnchorPane>

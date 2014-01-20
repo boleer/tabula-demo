@@ -1,0 +1,33 @@
+Building and running the application
+
+  Before building the project locally you need to have <<Maven>> 3.x+ and JDK 8 (build 117+ ) installed. You can download a developer preview of
+JDK 8 on the {{{https://jdk8.java.net/download.html}OpenJDK}} homepage.
+
+  Note that Java 8 will go into GA in march this your.
+
+* Sources
+
+  The project sources are available on Github {{{http://www.github.com/project}here}}.
+
+* Building
+
+  To build the project simply run:
+
+---
+  mvn clean package
+---
+
+  If you want to build a native bundle run the following Maven JavaFX plugin goal:
+
+---
+  mvn clean jfx:native
+---
+
+  The jfx plugin builds a native bundle with a JVM distribution. The resulting native installation files will be built to '<<target/jfx/native/bundles/simple-demo>>'.
+  Installers are only build if you have the Wix or Inno installed, and the native bundle is only the build to the same platform as you building from.
+
+  On the Windows platform for example the executeable is build to '<<target/jfx/native/bundles/simple-demo/simple-demo.exe>>'
+
+* Running the application
+
+  Simply execute the executeable located under '<<target/jfx/native/bundles/simple-demo>>', or run the main class <<<org.tabula.demo.DemoApplication>>> from your Java IDE.

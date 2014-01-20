@@ -1,0 +1,51 @@
+
+JavaFX Boardgame Engine Simple Demo
+
+    This is a simple proof of concept application demonstrating how easy it is to implement a basic board game engine using JavaFX,
+    as well showing JavaFX performance compared to Swing / AWT. The project is inspired by the {{{http://www.vassalengine.org}Vassal}} board game engine. Vassal is by far
+    the most advanced and feature complete board game engine available today.
+
+    The project uses the Maven JavaFX plugin, which allow you to easily build the application as runnable jar, native application or
+    native installer to all the major desktop platforms.
+
+    Note that this application is only a proof of concept, and is as such not properly designed with a clear seperation of concerns (MVP).
+
+[screendump.png] Screendump
+
+
+* Features
+
+    The application has the following basic features, needed in any board game engine implementation.
+
+    * Scrollable boardgame map
+
+    * Zooming
+
+    * Counter dragging
+
+    * Counter rotation
+
+    * Counter flipping
+
+    * Counter dropdown menus
+
+    * Animated transitionns
+
+    * Property binding
+
+    * Selection box
+
+
+  The application uses the map and counter images from the Vassal <<Totaler Krieg>> module. All counters (1100 in total) are loaded at startup to show JavaFX's performance with a high number of counters.
+
+* Limitations
+
+    The demo application is by no means a full game engine implementation. The demo application doesn't have support for multi piece dragging, stacking,
+    grids, networking, state model or game model for that matter.
+
+* Performance
+
+    JavaFX is hardware accelerated, and performs really well. You can test this out by using the zooming slider. It allows you to zoom
+    any zoom level you want in a blink of the eye. The reason JavaFX is so fast
+
+
