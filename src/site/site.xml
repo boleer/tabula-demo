@@ -20,7 +20,7 @@
     <body>
         <links>
             <item name="JavaFX" href="http://docs.oracle.com/javafx/"/>
-            <item name="GitHub Project" href="http://github.com/zonski/javafx-maven-plugin"/>
+            <item name="GitHub Project" href="https://github.com/boleer/tabula-demo"/>
         </links>
 
         <menu name="JavaFX boardgame simple demo">
@@ -35,7 +35,7 @@
         </menu>
 
         <menu name="Download">
-            <item name="Windows" href="simpledemo.zip"/>
+            <item name="Windows" href="downloads/windows/simple-demo.zip"/>
             <item name="Linux" href="contribute.html"/>
             <item name="Mac" href="contribute.html"/>
         </menu>

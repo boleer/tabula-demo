@@ -93,17 +93,24 @@ public class DemoController implements Initializable {
     }
 
     private void createCounters() {
-        List<String> counterPaths = new ArrayList<>();
-        try (BufferedReader in = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream("images/counters/")))) {
-            String path = in.readLine();
-            while (path != null) {
-                if (path.matches(".*a.png")) {
-                    counterPaths.add(path.substring(0, path.length() - 5));
-                }
-                path = in.readLine();
+
+        List<String> imageNames = new ArrayList<>();
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream("images/counters/images.properties")))) {
+            String imageName = in.readLine();
+            while (imageName != null) {
+                imageNames.add(imageName);
+                imageName = in.readLine();
             }
+
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+        List<String> counterPaths = new ArrayList<>();
+        for (String imageName : imageNames) {
+            if (imageName.matches(".*a.png")) {
+                counterPaths.add(imageName.substring(0, imageName.length() - 5));
+            }
         }
 
         double startX = 0;
