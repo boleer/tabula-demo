@@ -23,7 +23,7 @@ class CounterNode extends Pane {
     private final Image backImage;
     private ContextMenu contextMenu;
 
-    public CounterNode(String frontImagePath, String backImagePath, final ContextMenu contextMenu) {
+    CounterNode(String frontImagePath, String backImagePath, final ContextMenu contextMenu) {
         this.frontImage = new Image(getClass().getResourceAsStream(frontImagePath));
         if (backImagePath != null) {
             this.backImage = new Image(getClass().getResourceAsStream(backImagePath));
@@ -37,7 +37,6 @@ class CounterNode extends Pane {
     }
 
     private void init() {
-
         setOnMousePressed(event -> {
             lastX = event.getX();
             lastY = event.getY();
@@ -84,19 +83,19 @@ class CounterNode extends Pane {
 
     }
 
-    public void rotateRight() {
-        RotateTransition transistion = new RotateTransition(Duration.seconds(0.2), view);
-        transistion.setByAngle(90);
-        transistion.play();
+    private void rotateRight() {
+        RotateTransition transition = new RotateTransition(Duration.seconds(0.2), view);
+        transition.setByAngle(90);
+        transition.play();
     }
 
-    public void rotateLeft() {
-        RotateTransition transistion = new RotateTransition(Duration.seconds(0.2), view);
-        transistion.setByAngle(-90);
-        transistion.play();
+    private void rotateLeft() {
+        RotateTransition transition = new RotateTransition(Duration.seconds(0.2), view);
+        transition.setByAngle(-90);
+        transition.play();
     }
 
-    public void flip() {
+    private void flip() {
         if (view.getImage() == frontImage) {
             view.setImage(backImage);
         } else {

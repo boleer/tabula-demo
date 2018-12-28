@@ -21,6 +21,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -28,6 +30,7 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class DemoController implements Initializable {
@@ -46,17 +49,21 @@ public class DemoController implements Initializable {
     @FXML Group fxMap;
 
     @FXML
-    private void zoomIn(ActionEvent event) {
+    private void zoomIn() {
         zoomLevelProperty.set(zoomLevelProperty.get() + 0.1);
     }
 
     @FXML
-    private void zoomOut(ActionEvent event) {
+    private void zoomOut() {
         zoomLevelProperty.set(zoomLevelProperty.get() - 0.1);
     }
 
+    @Inject
+    TestService service;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println(service.getTitle());
         preparePopMenu();
         prepareBindings();
         createCounters();
@@ -65,9 +72,7 @@ public class DemoController implements Initializable {
 
     private void prepareSelectionBoxListeners() {
 
-        fxMapPane.setOnMousePressed(mouseEvent -> {
-            selectionBoxStart = new Point2D(mouseEvent.getX(), mouseEvent.getY());
-        });
+        fxMapPane.setOnMousePressed(mouseEvent -> selectionBoxStart = new Point2D(mouseEvent.getX(), mouseEvent.getY()));
 
         fxMapPane.setOnMouseDragged(mouseEvent -> {
             if (selectionBox == null) {
@@ -95,7 +100,7 @@ public class DemoController implements Initializable {
     private void createCounters() {
 
         List<String> imageNames = new ArrayList<>();
-        try (BufferedReader in = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream("images/counters/images.properties")))) {
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("images/counters/images.properties"))))) {
             String imageName = in.readLine();
             while (imageName != null) {
                 imageNames.add(imageName);
@@ -149,6 +154,7 @@ public class DemoController implements Initializable {
         MenuItem flipMenuItem = new MenuItem("Flip");
         flipMenuItem.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/rotate-right-icon.png"))));
         flipMenuItem.setAccelerator(KeyCombination.keyCombination("Ctrl+F"));
+
         MenuItem rotateRightMenuItem = new MenuItem("Rotate right");
         rotateRightMenuItem.setAccelerator(KeyCombination.keyCombination("Ctrl+R"));
         rotateRightMenuItem.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/flip-icon.png"))));
