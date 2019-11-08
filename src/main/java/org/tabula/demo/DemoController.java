@@ -21,7 +21,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -30,5 +30,5 @@ Why JavaFX
 
 Java and JavaFX version
 
-  The project is using Java 8 and JavaFX 8. Java 8 introduces Lambda's which allows you to write much more concise code for {{{http://learnjavafx.typepad.com/weblog/2013/02/mary-had-a-little-%CE%BB.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+JamesWeaversJavafxBlog+%28James+Weaver%3Fs+JavaFX+Blog%29}JavaFX event handlers}} and
+  The project is using Java 11 and JavaFX 11. Java 8 introduces Lambda's which allows you to write much more concise code for {{{http://learnjavafx.typepad.com/weblog/2013/02/mary-had-a-little-%CE%BB.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+JamesWeaversJavafxBlog+%28James+Weaver%3Fs+JavaFX+Blog%29}JavaFX event handlers}} and
   optimize for multiple cores. JavaFX also introduces new features like touch device support and new controls. Java 8 is available as {{{http://jdk8.java.net/download.html}early access preview}}, and is expected to go final this year.

@@ -46,6 +46,6 @@ JavaFX Boardgame Engine Simple Demo
 * Performance
 
     JavaFX is hardware accelerated, and performs really well. You can test this out by using the zooming slider. It allows you to zoom
-    any zoom level you want in a blink of the eye. The reason JavaFX is so fast
+    any zoom level you want in a blink of the eye. The reason JavaFX is so fast.
 
 

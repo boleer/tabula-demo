@@ -3,7 +3,7 @@ package org.tabula.demo;
 public class TestService {
 
     public String getTitle() {
-        return "Another little demo....";
+        return "Dependency injecting into JavaFX controllers is working....";
     }
 
 }
