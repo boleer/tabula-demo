@@ -30,6 +30,7 @@ class CounterNode extends Pane {
         } else {
             backImage = null;
         }
+
         this.view = new ImageView(frontImage);
         this.contextMenu = contextMenu;
         getChildren().add(view);
