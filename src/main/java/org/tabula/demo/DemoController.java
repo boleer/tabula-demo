@@ -33,7 +33,7 @@ import java.util.ResourceBundle;
 
 public class DemoController implements Initializable {
 
-    private DoubleProperty zoomLevelProperty = new SimpleDoubleProperty(1);
+    private final DoubleProperty zoomLevelProperty = new SimpleDoubleProperty(1);
     private final ContextMenu cm = new ContextMenu();
     private Rectangle selectionBox;
     private Point2D selectionBoxStart;

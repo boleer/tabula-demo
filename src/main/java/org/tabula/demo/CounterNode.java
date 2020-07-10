@@ -18,10 +18,10 @@ class CounterNode extends Pane {
     private double lastY;
     private static final DropShadow ds = new DropShadow(10, 3.0f, 3.0f, Color.color(0.4f, 0.4f, 0.4f));
 
-    private ImageView view;
+    private final ImageView view;
     private final Image frontImage;
     private final Image backImage;
-    private ContextMenu contextMenu;
+    private final ContextMenu contextMenu;
 
     CounterNode(String frontImagePath, String backImagePath, final ContextMenu contextMenu) {
         this.frontImage = new Image(getClass().getResourceAsStream(frontImagePath));

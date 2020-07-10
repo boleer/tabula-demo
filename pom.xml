@@ -79,7 +79,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M3</version>
+                <version>3.0.0-M4</version>
                 <configuration>
                     <argLine>--add-opens simple.demo/org.tabula.demo=ALL-UNNAMED --add-opens java.base/java.lang=weld.se.shaded --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</argLine>
                     <useModulePath/>
