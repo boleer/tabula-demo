@@ -40,8 +40,7 @@ public class CounterNodeTest extends ApplicationTest {
     @DisplayName("that click on zoomIn button zooms in 10 percent")
     void zoomIn() {
         clickOn("#fxZoomIn");
-        System.out.println("#######################" + lookup("#fxZoomText").queryAs(TextField.class).textProperty().getValue());
-        assertThat(lookup("#fxZoomText").queryAs(TextField.class).textProperty().getValue()).isEqualTo("1,1");
+        assertThat(lookup("#fxZoomText").queryAs(TextField.class).textProperty().getValue()).isIn("1,1", "1.1");
         assertThat(lookup("#fxMapPane").queryAs(Pane.class).scaleXProperty().getValue()).isEqualTo(1.1);
     }
 
@@ -49,7 +48,7 @@ public class CounterNodeTest extends ApplicationTest {
     @DisplayName("that click on zoomOut button zooms out 10 percent")
     void zoomOut() {
         clickOn("#fxZoomOut");
-        assertThat(lookup("#fxZoomText").queryAs(TextField.class).textProperty().getValue()).isEqualTo("0,9");
+        assertThat(lookup("#fxZoomText").queryAs(TextField.class).textProperty().getValue()).isIn("0,9", "0.9");
         assertThat(lookup("#fxMapPane").queryAs(Pane.class).scaleXProperty().getValue()).isEqualTo(0.9);
     }
 
