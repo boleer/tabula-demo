@@ -65,6 +65,12 @@
             <version>4.0.16-alpha</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>openjfx-monocle</artifactId>
+            <version>jdk-12.0.1+2</version>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.ow2.asm</groupId>
@@ -74,14 +80,75 @@
 
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.0.0-M4</version>
+                        <configuration>
+                            <argLine>--add-opens simple.demo/org.tabula.demo=ALL-UNNAMED --add-opens java.base/java.lang=weld.se.shaded --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED --add-exports javafx.graphics/com.sun.glass.ui=ALL-UNNAMED</argLine>
+                            <useModulePath/>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.ow2.asm</groupId>
+                                <artifactId>asm</artifactId>
+                                <version>7.3.1</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>headless</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.0.0-M4</version>
+                        <configuration>
+                            <argLine>--add-opens simple.demo/org.tabula.demo=ALL-UNNAMED --add-opens java.base/java.lang=weld.se.shaded --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED --add-opens javafx.graphics/com.sun.glass.ui=ALL-UNNAMED</argLine>
+                            <useModulePath/>
+                            <systemPropertyVariables>
+                                <testfx.robot>glass</testfx.robot>
+                                <testfx.headless>true</testfx.headless>
+                                <prism.order>sw</prism.order>
+                                <prism.text>t2k</prism.text>
+                                <java.awt.headless>true</java.awt.headless>
+                            </systemPropertyVariables>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.ow2.asm</groupId>
+                                <artifactId>asm</artifactId>
+                                <version>7.3.1</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <build>
         <finalName>simple-demo</finalName>
         <plugins>
-            <plugin>
+            <!--<plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M4</version>
                 <configuration>
-                    <argLine>--add-opens simple.demo/org.tabula.demo=ALL-UNNAMED --add-opens java.base/java.lang=weld.se.shaded --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</argLine>
+                    <argLine>&#45;&#45;add-opens simple.demo/org.tabula.demo=ALL-UNNAMED &#45;&#45;add-opens java.base/java.lang=weld.se.shaded &#45;&#45;add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</argLine>
                     <useModulePath/>
                 </configuration>
                 <dependencies>
@@ -91,7 +158,7 @@
                         <version>7.3.1</version>
                     </dependency>
                 </dependencies>
-            </plugin>
+            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -131,5 +198,7 @@
             </plugin>
         </plugins>
     </build>
+
+
 
 </project>
