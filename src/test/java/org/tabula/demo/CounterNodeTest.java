@@ -40,6 +40,7 @@ public class CounterNodeTest extends ApplicationTest {
     @DisplayName("that click on zoomIn button zooms in 10 percent")
     void zoomIn() {
         clickOn("#fxZoomIn");
+        System.out.println("#######################" + lookup("#fxZoomText").queryAs(TextField.class).textProperty().getValue());
         assertThat(lookup("#fxZoomText").queryAs(TextField.class).textProperty().getValue()).isEqualTo("1,1");
         assertThat(lookup("#fxMapPane").queryAs(Pane.class).scaleXProperty().getValue()).isEqualTo(1.1);
     }
