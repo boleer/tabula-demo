@@ -144,21 +144,6 @@
     <build>
         <finalName>simple-demo</finalName>
         <plugins>
-            <!--<plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M4</version>
-                <configuration>
-                    <argLine>&#45;&#45;add-opens simple.demo/org.tabula.demo=ALL-UNNAMED &#45;&#45;add-opens java.base/java.lang=weld.se.shaded &#45;&#45;add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</argLine>
-                    <useModulePath/>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.ow2.asm</groupId>
-                        <artifactId>asm</artifactId>
-                        <version>7.3.1</version>
-                    </dependency>
-                </dependencies>
-            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -198,7 +183,5 @@
             </plugin>
         </plugins>
     </build>
-
-
 
 </project>
