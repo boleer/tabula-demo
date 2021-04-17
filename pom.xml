@@ -23,34 +23,35 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>14</version>
+            <version>16</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>14</version>
+            <version>16</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.weld.se</groupId>
             <artifactId>weld-se-shaded</artifactId>
-            <version>3.1.4.Final</version>
+            <version>4.0.1.Final</version>
         </dependency>
+
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.16.1</version>
+            <version>3.19.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.6.2</version>
+            <version>5.7.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.6.2</version>
+            <version>5.7.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -75,9 +76,8 @@
         <dependency>
             <groupId>org.ow2.asm</groupId>
             <artifactId>asm</artifactId>
-            <version>7.3.1</version>
+            <version>9.1</version>
         </dependency>
-
     </dependencies>
 
     <profiles>
@@ -90,7 +90,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.0.0-M4</version>
+                        <version>3.0.0-M5</version>
                         <configuration>
                             <argLine>--add-opens simple.demo/org.tabula.demo=ALL-UNNAMED --add-opens java.base/java.lang=weld.se.shaded --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED --add-exports javafx.graphics/com.sun.glass.ui=ALL-UNNAMED</argLine>
                             <useModulePath/>
@@ -99,7 +99,7 @@
                             <dependency>
                                 <groupId>org.ow2.asm</groupId>
                                 <artifactId>asm</artifactId>
-                                <version>7.3.1</version>
+                                <version>9.1</version>
                             </dependency>
                         </dependencies>
                     </plugin>
@@ -132,7 +132,7 @@
                             <dependency>
                                 <groupId>org.ow2.asm</groupId>
                                 <artifactId>asm</artifactId>
-                                <version>7.3.1</version>
+                                <version>9.1</version>
                             </dependency>
                         </dependencies>
                     </plugin>
@@ -161,15 +161,15 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <release>14</release>
-                    <source>14</source>
-                    <target>14</target>
+                    <release>16</release>
+                    <source>16</source>
+                    <target>16</target>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
+                <version>3.0.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -178,6 +178,12 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <systemProperties>
+                        <systemProperty>
+                            <key>org.jboss.weld.executor.threadPoolType</key>
+                            <value>NONE</value>
+                        </systemProperty>
+                    </systemProperties>
                     <mainClass>org.tabula.demo.DemoApplication</mainClass>
                 </configuration>
             </plugin>

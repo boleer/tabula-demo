@@ -12,6 +12,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+/**
+ * Pane node representing a counter.
+ *
+ * The node implementation contains basic functionally for dragging, flipping and rotation.
+ */
 class CounterNode extends Pane {
 
     private double lastX;
