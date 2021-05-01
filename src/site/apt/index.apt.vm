@@ -8,7 +8,7 @@ JavaFX Boardgame Engine Simple Demo
     The project uses the Maven JavaFX plugin, which allow you to easily build the application as runnable jar, native application or
     native installer to all the major desktop platforms.
 
-    Note that this application is only a proof of concept, and is as such not properly designed with a clear seperation of concerns (MVP).
+    Note that this application is only a proof of concept, and is as such not properly designed with a clear separation of concerns (MVC).
 
 [screendump.png] Screendump
 
@@ -29,7 +29,7 @@ JavaFX Boardgame Engine Simple Demo
 
     * Counter dropdown menus
 
-    * Animated transitionns
+    * Animated transitions
 
     * Property binding
 
