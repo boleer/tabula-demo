@@ -28,14 +28,6 @@ public class CounterNodeTest extends ApplicationTest {
         stage.show();
     }
 
-/*    @Test
-    @DisplayName("that counter nodes can be instantiated")
-    void testCounterNode() {
-        CounterNode node = new CounterNode("/images/counters/D8_counters_1_00_00_a.png", "/images/counters/D8_counters_1_00_00_b.png",
-                new ContextMenu());
-        assertThat(node).isNotNull();
-    }*/
-
     @Test
     @DisplayName("that click on zoomIn button zooms in 10 percent")
     void zoomIn() {
