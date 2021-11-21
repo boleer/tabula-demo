@@ -1,41 +1,29 @@
 package org.tabula.demo;
 
+import java.net.URL;
+import java.text.DecimalFormat;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
+
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCombination;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
-
-import jakarta.inject.Inject;
-
+@Singleton
 public class DemoController implements Initializable {
 
     private final DoubleProperty zoomLevelProperty = new SimpleDoubleProperty(1);
-    private final ContextMenu cm = new ContextMenu();
     private Rectangle selectionBox;
     private Point2D selectionBoxStart;
 
@@ -47,6 +35,12 @@ public class DemoController implements Initializable {
     @FXML Pane fxMapPane;
     @FXML Group fxMap;
 
+    @Inject
+    private TestService service;
+
+    @Inject
+    private List<CounterNode> counters;
+
     @FXML
     private void zoomIn() {
         zoomLevelProperty.set(zoomLevelProperty.get() + 0.1);
@@ -57,20 +51,15 @@ public class DemoController implements Initializable {
         zoomLevelProperty.set(zoomLevelProperty.get() - 0.1);
     }
 
-    @Inject
-    TestService service;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println(service.getTitle());
-        preparePopMenu();
         prepareBindings();
-        createCounters();
+        addCounters();
         prepareSelectionBoxListeners();
     }
 
     private void prepareSelectionBoxListeners() {
-
         fxMapPane.setOnMousePressed(mouseEvent -> selectionBoxStart = new Point2D(mouseEvent.getX(), mouseEvent.getY()));
 
         fxMapPane.setOnMouseDragged(mouseEvent -> {
@@ -96,39 +85,13 @@ public class DemoController implements Initializable {
 
     }
 
-    private void createCounters() {
-
-        List<String> imageNames = new ArrayList<>();
-        try (BufferedReader in = new BufferedReader(new InputStreamReader(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("images/counters/images.properties"))))) {
-            String imageName = in.readLine();
-            while (imageName != null) {
-                imageNames.add(imageName);
-                imageName = in.readLine();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        List<String> counterPaths = new ArrayList<>();
-        for (String imageName : imageNames) {
-            if (imageName.matches(".*a.png")) {
-                counterPaths.add(imageName.substring(0, imageName.length() - 5));
-            }
-        }
-
+    private void addCounters() {
         double startX = 0;
         double startY = 200;
         int i = 0;
-        for (String path : counterPaths) {
-            CounterNode counter;
-            if (getClass().getClassLoader().getResourceAsStream("images/counters/" + (path + "b.png")) == null) {
-                counter = new CounterNode("/images/counters/" + path + "a.png",  null, cm);
-            } else {
-                counter = new CounterNode("/images/counters/" + path + "a.png",  "/images/counters/" + path + "b.png", cm);
-            }
-            i = i + 1;
 
+        for (CounterNode counter : counters) {
+            i += 1;
             if (i % 25 == 0) {
                 startY += 50;
                 startX = 0;
@@ -147,23 +110,6 @@ public class DemoController implements Initializable {
         label.textProperty().bind(zoomLevelProperty.multiply(100).asString().concat(" %"));
         fxSlider.valueProperty().bindBidirectional(zoomLevelProperty);
         fxZoomText.textProperty().bindBidirectional(zoomLevelProperty, new DecimalFormat());
-    }
-
-    private void preparePopMenu() {
-        MenuItem flipMenuItem = new MenuItem("Flip");
-        flipMenuItem.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/rotate-right-icon.png"))));
-        flipMenuItem.setAccelerator(KeyCombination.keyCombination("Ctrl+F"));
-
-        MenuItem rotateRightMenuItem = new MenuItem("Rotate right");
-        rotateRightMenuItem.setAccelerator(KeyCombination.keyCombination("Ctrl+R"));
-        rotateRightMenuItem.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/flip-icon.png"))));
-        MenuItem rotateLeftMenuItem = new MenuItem("Rotate left");
-        rotateLeftMenuItem.setAccelerator(KeyCombination.keyCombination("Ctrl+L"));
-        rotateLeftMenuItem.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/rotate-left-icon.png"))));
-
-        cm.getItems().add(flipMenuItem);
-        cm.getItems().add(rotateRightMenuItem);
-        cm.getItems().add(rotateLeftMenuItem);
     }
 
 }

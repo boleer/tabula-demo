@@ -14,33 +14,31 @@ import javafx.util.Duration;
 
 /**
  * Pane node representing a counter.
- *
+ * <p>
  * The node implementation contains basic functionally for dragging, flipping and rotation.
  */
-class CounterNode extends Pane {
+public class CounterNode extends Pane {
 
     private double lastX;
     private double lastY;
+
     private static final DropShadow ds = new DropShadow(10, 3.0f, 3.0f, Color.color(0.4f, 0.4f, 0.4f));
 
     private final ImageView view;
-    private final Image frontImage;
-    private final Image backImage;
+    private Image frontImage;
+    private Image backImage;
     private final ContextMenu contextMenu;
 
-    CounterNode(String frontImagePath, String backImagePath, final ContextMenu contextMenu) {
-        this.frontImage = new Image(getClass().getResourceAsStream(frontImagePath));
-        if (backImagePath != null) {
-            this.backImage = new Image(getClass().getResourceAsStream(backImagePath));
-        } else {
-            backImage = null;
-        }
-
-        this.view = new ImageView(frontImage);
+    public CounterNode(String frontImagePath, String backImagePath, final ContextMenu contextMenu) {
+        frontImage = new Image(getClass().getResourceAsStream(frontImagePath));
+        backImage = backImagePath != null ? new Image(getClass().getResourceAsStream(backImagePath)) : null;
+        setUserData(frontImagePath);
+        view = new ImageView(frontImage);
         this.contextMenu = contextMenu;
         getChildren().add(view);
         init();
     }
+
 
     private void init() {
         setOnMousePressed(event -> {
