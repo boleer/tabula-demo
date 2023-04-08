@@ -1,15 +1,20 @@
 package org.tabula.demo;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.RotateTransition;
+import javafx.animation.Timeline;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.PerspectiveTransform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 /**
@@ -34,6 +39,8 @@ public class CounterNode extends Pane {
         backImage = backImagePath != null ? new Image(getClass().getResourceAsStream(backImagePath)) : null;
         setUserData(frontImagePath);
         view = new ImageView(frontImage);
+        view.setFitHeight(frontImage.getHeight());
+        view.setFitWidth(frontImage.getWidth());
         this.contextMenu = contextMenu;
         getChildren().add(view);
         init();
@@ -100,11 +107,53 @@ public class CounterNode extends Pane {
     }
 
     private void flip() {
-        if (view.getImage() == frontImage) {
-            view.setImage(backImage);
-        } else {
-            view.setImage(frontImage);
-        }
+        final double width = view.getImage().getWidth();
+        final double height = view.getImage().getHeight();
+
+        // Create perspective transform
+        PerspectiveTransform perspectiveTransform = new PerspectiveTransform();
+        perspectiveTransform.setUlx(0.0);
+        perspectiveTransform.setUly(0.0);
+        perspectiveTransform.setUrx(width);
+        perspectiveTransform.setUry(0.0);
+        perspectiveTransform.setLrx(width);
+        perspectiveTransform.setLry(height);
+        perspectiveTransform.setLlx(0.0);
+        perspectiveTransform.setLly(height);
+
+        // Set transform on counter node
+        this.setEffect(perspectiveTransform);
+
+        // Animate flip effect
+        Timeline timeline = new Timeline(
+            new KeyFrame(Duration.ZERO, new KeyValue(perspectiveTransform.ulxProperty(), 0.0),
+                new KeyValue(perspectiveTransform.uryProperty(), 0.0),
+                new KeyValue(perspectiveTransform.urxProperty(), width),
+                new KeyValue(perspectiveTransform.uryProperty(), 0.0),
+                new KeyValue(perspectiveTransform.lrxProperty(), width),
+                new KeyValue(perspectiveTransform.lryProperty(), height),
+                new KeyValue(perspectiveTransform.llxProperty(), 0.0),
+                new KeyValue(perspectiveTransform.llyProperty(), height)),
+            new KeyFrame(Duration.millis(200), new KeyValue(perspectiveTransform.ulxProperty(), width),
+                new KeyValue(perspectiveTransform.uryProperty(), 0.0),
+                new KeyValue(perspectiveTransform.urxProperty(), 0.0),
+                new KeyValue(perspectiveTransform.uryProperty(), 0.0),
+                new KeyValue(perspectiveTransform.lrxProperty(), 0.0),
+                new KeyValue(perspectiveTransform.lryProperty(), height),
+                new KeyValue(perspectiveTransform.llxProperty(), width),
+                new KeyValue(perspectiveTransform.llyProperty(), height)));
+
+        // Update counter image after flip animation
+        timeline.setOnFinished(event -> {
+            if (view.getImage() == frontImage) {
+                view.setImage(backImage);
+            } else {
+                view.setImage(frontImage);
+            }
+            this.setEffect(null); // Remove perspective transform after flip animation
+        });
+
+        timeline.play();
     }
 
 }

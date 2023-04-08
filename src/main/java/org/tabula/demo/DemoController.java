@@ -14,8 +14,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
@@ -24,6 +25,7 @@ import javafx.scene.shape.StrokeType;
 public class DemoController implements Initializable {
 
     private final DoubleProperty zoomLevelProperty = new SimpleDoubleProperty(1);
+    public Canvas fxEffectsCanvas;
     private Rectangle selectionBox;
     private Point2D selectionBoxStart;
 
@@ -32,7 +34,7 @@ public class DemoController implements Initializable {
     @FXML Button fxZoomIn;
     @FXML Button fxZoomOut;
     @FXML Label label;
-    @FXML Pane fxMapPane;
+    @FXML StackPane fxMapPane;
     @FXML Group fxMap;
 
     @Inject
@@ -86,11 +88,11 @@ public class DemoController implements Initializable {
     }
 
     private void addCounters() {
-        double startX = 0;
-        double startY = 200;
-        int i = 0;
+            double startX = 0;
+            double startY = 200;
+            int i = 0;
 
-        for (CounterNode counter : counters) {
+            for (CounterNode counter : counters) {
             i += 1;
             if (i % 25 == 0) {
                 startY += 50;

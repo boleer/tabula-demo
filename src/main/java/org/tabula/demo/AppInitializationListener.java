@@ -2,15 +2,15 @@ package org.tabula.demo;
 
 import java.io.IOException;
 
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import org.tabula.demo.cdi.StartupScene;
-
-import jakarta.enterprise.event.Observes;
-import jakarta.inject.Inject;
 
 public class AppInitializationListener {
 
