@@ -12,6 +12,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+import java.util.Objects;
+
 /**
  * Pane node representing a counter.
  * <p>
@@ -25,13 +27,13 @@ public class CounterNode extends Pane {
     private static final DropShadow ds = new DropShadow(10, 3.0f, 3.0f, Color.color(0.4f, 0.4f, 0.4f));
 
     private final ImageView view;
-    private Image frontImage;
-    private Image backImage;
+    private final Image frontImage;
+    private final Image backImage;
     private final ContextMenu contextMenu;
 
     public CounterNode(String frontImagePath, String backImagePath, final ContextMenu contextMenu) {
         frontImage = new Image(getClass().getResourceAsStream(frontImagePath));
-        backImage = backImagePath != null ? new Image(getClass().getResourceAsStream(backImagePath)) : null;
+        backImage = backImagePath != null ? new Image(Objects.requireNonNull(getClass().getResourceAsStream(backImagePath))) : null;
         setUserData(frontImagePath);
         view = new ImageView(frontImage);
         this.contextMenu = contextMenu;
@@ -50,8 +52,8 @@ public class CounterNode extends Pane {
 
         setOnMouseDragged(event -> {
             Pane node = ((Pane) event.getSource());
-            node.getChildren().get(0).setEffect(ds);
-            node.getChildren().get(0).setOpacity(0.5D);
+            node.getChildren().getFirst().setEffect(ds);
+            node.getChildren().getFirst().setOpacity(0.5D);
             node.setLayoutX(node.getLayoutX() + (event.getX() - lastX));
             node.setLayoutY(node.getLayoutY() + (event.getY() - lastY));
             event.consume();
@@ -59,25 +61,25 @@ public class CounterNode extends Pane {
 
         setOnMouseReleased(event -> {
             Pane node = ((Pane) event.getSource());
-            node.getChildren().get(0).setOpacity(1.0D);
-            node.getChildren().get(0).setEffect(null);
+            node.getChildren().getFirst().setOpacity(1.0D);
+            node.getChildren().getFirst().setEffect(null);
         });
 
         view.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             if (e.getButton() == MouseButton.SECONDARY) {
                 for (MenuItem menuItem : contextMenu.getItems()) {
                     if (menuItem.getText().equals("Rotate left")) {
-                        menuItem.setOnAction(actionEvent -> rotateLeft());
+                        menuItem.setOnAction(_ -> rotateLeft());
                     }
                     if (menuItem.getText().equals("Rotate right")) {
-                        menuItem.setOnAction(actionEvent -> rotateRight());
+                        menuItem.setOnAction(_ -> rotateRight());
                     }
                     if (menuItem.getText().equals("Flip")) {
                         if (backImage == null) {
                             menuItem.disableProperty().set(true);
                         } else {
                             menuItem.disableProperty().set(false);
-                            menuItem.setOnAction(actionEvent -> flip());
+                            menuItem.setOnAction(_ -> flip());
                         }
                     }
                 }

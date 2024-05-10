@@ -21,7 +21,7 @@ public class DemoApplication extends Application {
     public void start(Stage stage) {
         SeContainerInitializer initializer = SeContainerInitializer.newInstance();
         container = initializer.initialize();
-        container.getBeanManager().fireEvent(stage, new AnnotationLiteral<StartupScene>() {});
+        container.getBeanManager().getEvent().select(new AnnotationLiteral<StartupScene>() {}).fire(stage);
     }
 
     @Override

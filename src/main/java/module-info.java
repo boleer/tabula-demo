@@ -4,6 +4,7 @@ module simple.demo {
     requires javafx.fxml;
     requires weld.se.shaded;
     requires java.desktop;
+    requires java.logging;
 
     exports org.tabula.demo;
     exports org.tabula.demo.cdi;

@@ -78,7 +78,7 @@ public class DemoController implements Initializable {
             selectionBox.setHeight(mouseEvent.getY() - selectionBoxStart.getY());
         });
 
-        fxMapPane.setOnMouseReleased(mouseEvent -> {
+        fxMapPane.setOnMouseReleased(_ -> {
             fxMap.getChildren().remove(selectionBox);
             selectionBox = null;
         });
