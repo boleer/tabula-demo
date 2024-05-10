@@ -1,6 +1,5 @@
 package org.tabula.demo;
 
-import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;

@@ -79,12 +79,12 @@ JavaFX technology is a very good fit for a project of this type:
 
 Java and JavaFX version
 
-The project is using Java 17 and JavaFX 17. Java 8 introduced Lambda's which allows you to write much more concise code for [JavaFX event handlers](http://learnjavafx.typepad.com/weblog/2013/02/mary-had-a-little-%CE%BB.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+JamesWeaversJavafxBlog+%28James+Weaver%3Fs+JavaFX+Blog%29) and
+The project is using Java 20 and JavaFX 20. Java 8 introduced Lambda's which allows you to write much more concise code for [JavaFX event handlers](http://learnjavafx.typepad.com/weblog/2013/02/mary-had-a-little-%CE%BB.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+JamesWeaversJavafxBlog+%28James+Weaver%3Fs+JavaFX+Blog%29) and
 optimize for multiple cores. JavaFX also introduces new features like touch device support and new controls. 
 
 ## Building and running the application
 
-Before building the project locally you need to have <<Maven>> 3.8.x+ and JDK 17 installed.
+Before building the project locally you need to have <<Maven>> 3.8.x+ and JDK 20 installed.
 
 ### Building
 
