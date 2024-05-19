@@ -226,10 +226,11 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <argLine>--add-opens simple.demo/org.tabula.demo=ALL-UNNAMED --add-opens
-                        java.base/java.lang=weld.se.shaded --add-exports
-                        javafx.graphics/com.sun.javafx.application=ALL-UNNAMED --add-exports
-                        javafx.graphics/com.sun.glass.ui=ALL-UNNAMED
+                    <argLine>--add-opens simple.demo/org.tabula.demo=ALL-UNNAMED
+                        --add-opens java.base/java.lang=weld.se.shaded
+                        --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+                        --add-opens javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+                        --add-exports javafx.graphics/com.sun.glass.ui=ALL-UNNAMED
                     </argLine>
                     <useModulePath/>
                 </configuration>
@@ -249,10 +250,16 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>3.0.0-M5</version>
                         <configuration>
-                            <argLine>--add-opens simple.demo/org.tabula.demo=ALL-UNNAMED --add-opens
-                                java.base/java.lang=weld.se.shaded --add-exports
-                                javafx.graphics/com.sun.javafx.application=ALL-UNNAMED --add-opens
-                                javafx.graphics/com.sun.glass.ui=ALL-UNNAMED
+                            <argLine>
+                                --add-exports=javafx.base/com.sun.javafx.logging=ALL-UNNAMED
+                                --add-exports=java.base/com.sun.javafx.logging=ALL-UNNAMED
+                                --add-exports=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+                                --add-exports=javafx.graphics/com.sun.javafx.util=ALL-UNNAMED
+                                --add-exports=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+                                --add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+                                --add-opens=java.base/java.lang=weld.se.shaded
+                                --add-opens=simple.demo/org.tabula.demo=ALL-UNNAMED
+                                --add-opens=javafx.graphics/com.sun.glass.ui=ALL-UNNAMED
                             </argLine>
                             <useModulePath/>
                             <systemPropertyVariables>
