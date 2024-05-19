@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import org.tabula.demo.eventing.CounterMovedEvent;
 
 import java.util.Objects;
 
@@ -60,8 +61,7 @@ public class CounterNode extends Pane {
             Pane node = ((Pane) event.getSource());
             node.getChildren().getFirst().setEffect(ds);
             node.getChildren().getFirst().setOpacity(0.5D);
-            node.setLayoutX(node.getLayoutX() + (event.getX() - lastX));
-            node.setLayoutY(node.getLayoutY() + (event.getY() - lastY));
+            node.relocate(node.getLayoutX() + (event.getX() - lastX), node.getLayoutY() + (event.getY() - lastY));
             event.consume();
         });
 
@@ -69,23 +69,27 @@ public class CounterNode extends Pane {
             Pane node = ((Pane) event.getSource());
             node.getChildren().getFirst().setOpacity(1.0D);
             node.getChildren().getFirst().setEffect(null);
+
+            fireEvent(new CounterMovedEvent());
         });
 
         view.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             if (e.getButton() == MouseButton.SECONDARY) {
                 for (MenuItem menuItem : contextMenu.getItems()) {
-                    if (menuItem.getText().equals("Rotate left")) {
-                        menuItem.setOnAction(_ -> rotateLeft());
-                    }
-                    if (menuItem.getText().equals("Rotate right")) {
-                        menuItem.setOnAction(_ -> rotateRight());
-                    }
-                    if (menuItem.getText().equals("Flip")) {
-                        if (backImage == null) {
-                            menuItem.disableProperty().set(true);
-                        } else {
-                            menuItem.disableProperty().set(false);
-                            menuItem.setOnAction(_ -> flip());
+                    switch (menuItem.getText()) {
+                        case "Rotate left":
+                            menuItem.setOnAction(_ -> rotateLeft());
+                            break;
+                        case "Rotate right":
+                            menuItem.setOnAction(_ -> rotateRight());
+                            break;
+                        case "Flip": {
+                            if (backImage == null) {
+                                menuItem.disableProperty().set(true);
+                            } else {
+                                menuItem.disableProperty().set(false);
+                                menuItem.setOnAction(_ -> flip());
+                            }
                         }
                     }
                 }
@@ -123,7 +127,7 @@ public class CounterNode extends Pane {
         perspectiveTransform.setLly(height);
 
         // Set transform on counter node
-        this.setEffect(perspectiveTransform);
+
 
         // Animate flip effect
         Timeline timeline = new Timeline(
@@ -144,8 +148,11 @@ public class CounterNode extends Pane {
                 new KeyValue(perspectiveTransform.llxProperty(), width),
                 new KeyValue(perspectiveTransform.llyProperty(), height)));
 
+        this.setEffect(perspectiveTransform);
+
+
         // Update counter image after flip animation
-        timeline.setOnFinished(event -> {
+        timeline.setOnFinished(_ -> {
             if (view.getImage() == frontImage) {
                 view.setImage(backImage);
             } else {

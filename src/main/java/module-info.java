@@ -8,6 +8,7 @@ module simple.demo {
 
     exports org.tabula.demo;
     exports org.tabula.demo.cdi;
+    exports org.tabula.demo.eventing;
 
     opens org.tabula.demo to weld.se.shaded, javafx.fxml;
     opens images;
