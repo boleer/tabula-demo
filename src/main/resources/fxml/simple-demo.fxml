@@ -34,6 +34,7 @@
                         <Group fx:id="fxMap">
                             <ImageView fx:id="mapImageView">
                                 <Image preserveRatio="true" smooth="true" url="@/images/TKMap.png"/>
+                                <!--<Image preserveRatio="true" smooth="true" url="@/images/TKMap2.jpg"/>-->
                             </ImageView>
                             <Canvas fx:id="gridCanvas" width="800.0" height="800.0" AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0"
                                     AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="0.0" style="-fx-background-color: transparent;"/>
