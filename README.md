@@ -2,7 +2,7 @@
 > JavaFX Boardgame Engine Simple Demo
 
 [![Build Status](https://github.com/boleer/tabula-demo/actions/workflows/build.yml/badge.svg)](https://github.com/boleer/tabula-demo/actions)
-[![License: MIT](https://img.shields.io/github/license/boleer/tabula-demo)](https://www.gnu.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Introduction
 
